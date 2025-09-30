@@ -21,7 +21,9 @@ def is_valid_ip(ip):
         return False
     else:
         for i in iplist:
-          is_valid_part(i)
+            if not is_valid_part(i):
+                return False
+        return True
 
 ## is_valid_ip("01.168.127.12")
 
@@ -36,9 +38,26 @@ def decimal_to_binary(n):
 ##print(decimal_to_binary(15))
 
 def binary_to_decimal(b):
-    if b == 0:
-        return "0"
+    if b == "":
+        return 0
     else:
+        plac = len(b)-1
+        return int(b[0]) * (2 ** plac) + binary_to_decimal(b[1:])
+
+## print(binary_to_decimal("1111"))
+
+def ip_to_binary(ip):
+    if is_valid_ip(ip):
+         iplist = ip.split(".")
+         binaries = [decimal_to_binary(int(i)) for i in iplist]
+         return ".".join(binaries)
+    else:
+        print("Invalid!")
+        return False
+
+print(ip_to_binary("255.255.255.0"))
+
+
 
 
 
